@@ -13,7 +13,7 @@ export const todoModule = {
             },
             {
                 id: 3,
-                text: "Найти новую работу",
+                text: "Получить предложение о работе",
                 completed: false,
             }
         ]

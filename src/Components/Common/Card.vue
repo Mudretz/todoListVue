@@ -10,17 +10,6 @@
                 :src="deleteIcon"
                 class="icon delete"
             >
-            <!-- <img
-                @click="$emit('deletePost', todo.id)"
-                :src="deleteIcon"
-                class="icon delete"
-            > -->
-            <!-- <img
-                v-show="!todo.completed"
-                :src="editIcon"
-                class="icon edit"
-                
-            > -->
             <img
                 v-show="!todo.completed"
                 @click="$emit('completedTodo', todo.id)"
