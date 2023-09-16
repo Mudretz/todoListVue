@@ -8,41 +8,23 @@
             <img
                 @click="setActive(true)"
                 :src="deleteIcon"
+                alt="удалить"
                 class="icon delete"
             >
             <img
                 v-show="!todo.completed"
                 @click="$emit('completedTodo', todo.id)"
                 :src="checkIcon"
+                alt="выполено"
                 class="icon check"
             >
         </div>
-        <Modal
+        <ModalAddTodo
+            :todo="todo"
             :active="active"
+            @deletePost="$emit('deletePost', todo.id)"
             @setActive="setActive"
-        >
-            <div class="modal">
-                <div class="box">
-                    <p>Вы действительно хотите удалить задачу?</p>
-                    <p class="text">"{{ todo.text }}"</p>
-                </div>
-                <div class="buttonGroup">
-                    <CustomButton
-                        type="button"
-                        color="danger"
-                        @click="$emit('deletePost', todo.id)"
-                    >
-                        Да
-                    </CustomButton>
-                    <CustomButton
-                        @click="setActive(false)"
-                        type="button"
-                    >
-                        Нет
-                    </CustomButton>
-                </div>
-            </div>
-        </Modal>
+        />
     </div>
 </template>
 
@@ -50,8 +32,10 @@
 import deleteIcon from "@/Assets/Icons/delete.svg";
 import editIcon from "@/Assets/Icons/edit.svg";
 import checkIcon from "@/Assets/Icons/check.svg";
+import ModalAddTodo from "@/Components/Common/ModalAddTodo.vue";
 
 export default {
+    components: {ModalAddTodo},
     emits: ["deletePost", "completedTodo"],
     data() {
         return {
@@ -79,28 +63,6 @@ export default {
     @use "@/Style/colors/colors.scss";
     @use "@/Style/mixins/borderStl.scss";
 
-    .modal {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-
-        .box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .text {
-            font-weight: 700;
-        }
-    }
-
-    .buttonGroup {
-        margin-top: 30px;
-        display: flex;
-        column-gap: 200px;
-    }
     .card {
         padding: 0 20px;
         display: flex;
